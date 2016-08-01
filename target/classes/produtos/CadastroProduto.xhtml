@@ -48,7 +48,7 @@
 
 				<p:outputLabel value="Unidade" for="unidade" />
 				<p:selectOneMenu id="unidade"
-					value="#{cadastroProdutoBean.produto.unidade}">
+					value="#{cadastroProdutoBean.produto.unidade}" filter="true">
 					<f:selectItem itemLabel="Selecione a unidade" />
 					<f:selectItems value="#{cadastroProdutoBean.unidadeList}"
 						var="unidade" itemValue="#{unidade}" itemLabel="#{unidade.nome}" />
@@ -56,7 +56,7 @@
 
 				<p:outputLabel value="Categoria" for="categoria" />
 				<p:selectOneMenu id="categoria"
-					value="#{cadastroProdutoBean.produto.categoria}">
+					value="#{cadastroProdutoBean.produto.categoria}" filter="true">
 					<f:selectItem itemLabel="Selecione a categoria" />
 					<f:selectItems value="#{cadastroProdutoBean.categoriaList}"
 						var="categoria" itemValue="#{categoria}"

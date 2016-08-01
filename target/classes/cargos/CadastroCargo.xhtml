@@ -1,0 +1,84 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<ui:define name="titulo">Novo Cargo</ui:define>
+	<!-- TITULO DA ABA -->
+
+	<ui:define name="corpo">
+
+		<f:metadata>
+			<o:viewParam name="cargo"
+				value="#{cadastroCargoBean.cargo}" />
+			<f:viewAction action="#{cadastroCargoBean.inicializar}" />
+		</f:metadata>
+
+		<h:form id="frm">
+			<p:focus context="frm" />
+
+			<h1>Novo Cargo</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/cargos/CadastroCargo" />
+					<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroCargoBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/cargos/PesquisaCargos"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80" 
+				value="#{cadastroCargoBean.cargo.nome}"/>
+				
+				<p:outputLabel value="Acesso a clientes" for="clientes" />
+        		<p:selectBooleanCheckbox id="clientes" value="#{cadastroCargoBean.cargo.clientes}" />
+        		
+        		<p:outputLabel value="Acesso a categorias" for="categorias" />
+        		<p:selectBooleanCheckbox id="categorias" value="#{cadastroCargoBean.cargo.categorias}" />
+        		
+        		<p:outputLabel value="Acesso a contas a pagar" for="contasPagar" />
+        		<p:selectBooleanCheckbox id="contasPagar" value="#{cadastroCargoBean.cargo.contasPagar}" />
+        		
+        		<p:outputLabel value="Acesso a contas a receber" for="contasReceber" />
+        		<p:selectBooleanCheckbox id="contasReceber" value="#{cadastroCargoBean.cargo.contasReceber}" />
+        		
+        		<p:outputLabel value="Acesso a compras" for="compras" />
+        		<p:selectBooleanCheckbox id="compras" value="#{cadastroCargoBean.cargo.compras}" />
+        		
+        		<p:outputLabel value="Acesso a caixa" for="caixa" />
+        		<p:selectBooleanCheckbox id="caixa" value="#{cadastroCargoBean.cargo.caixa}" />
+        		
+        		<p:outputLabel value="Acesso a fornecedores" for="fornecedores" />
+        		<p:selectBooleanCheckbox id="fornecedores" value="#{cadastroCargoBean.cargo.fornecedores}" />
+        		
+        		<p:outputLabel value="Acesso a formas de Pagamento" for="formasPagamento" />
+        		<p:selectBooleanCheckbox id="formasPagamento" value="#{cadastroCargoBean.cargo.formasPagamento}" />
+        		
+        		<p:outputLabel value="Acesso a produtos" for="produtos" />
+        		<p:selectBooleanCheckbox id="produtos" value="#{cadastroCargoBean.cargo.produtos}" />
+        		
+        		<p:outputLabel value="Acesso a unidades" for="unidades" />
+        		<p:selectBooleanCheckbox id="unidades" value="#{cadastroCargoBean.cargo.unidades}" />
+        		
+        		<p:outputLabel value="Acesso aos usuarios" for="usuarios" />
+        		<p:selectBooleanCheckbox id="usuarios" value="#{cadastroCargoBean.cargo.usuarios}" />
+        		
+			</p:panelGrid>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

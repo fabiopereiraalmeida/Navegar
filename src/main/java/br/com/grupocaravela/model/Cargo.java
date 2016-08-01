@@ -24,6 +24,19 @@ public class Cargo implements Serializable{
 	private Long id;
 	private String nome;
 	
+	private Boolean clientes;
+	private Boolean categorias;
+	private Boolean contasPagar;
+	private Boolean contasReceber;
+	private Boolean compras;
+	private Boolean caixa;
+	private Boolean fornecedores;
+	private Boolean formasPagamento;	
+	private Boolean produtos;
+	private Boolean unidades;
+	private Boolean usuarios;
+	private Boolean vendas;
+	
 	private Empresa empresa;
 
 	@Id
@@ -56,6 +69,102 @@ public class Cargo implements Serializable{
 
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
+	}
+	
+	public Boolean getVendas() {
+		return vendas;
+	}
+
+	public void setVendas(Boolean vendas) {
+		this.vendas = vendas;
+	}
+
+	public Boolean getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(Boolean clientes) {
+		this.clientes = clientes;
+	}
+
+	public Boolean getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(Boolean fornecedores) {
+		this.fornecedores = fornecedores;
+	}
+
+	public Boolean getContasPagar() {
+		return contasPagar;
+	}
+
+	public void setContasPagar(Boolean contasPagar) {
+		this.contasPagar = contasPagar;
+	}
+
+	public Boolean getContasReceber() {
+		return contasReceber;
+	}
+
+	public void setContasReceber(Boolean contasReceber) {
+		this.contasReceber = contasReceber;
+	}
+
+	public Boolean getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Boolean compras) {
+		this.compras = compras;
+	}
+
+	public Boolean getCaixa() {
+		return caixa;
+	}
+
+	public void setCaixa(Boolean caixa) {
+		this.caixa = caixa;
+	}
+
+	public Boolean getFormasPagamento() {
+		return formasPagamento;
+	}
+
+	public void setFormasPagamento(Boolean formasPagamento) {
+		this.formasPagamento = formasPagamento;
+	}
+
+	public Boolean getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(Boolean categorias) {
+		this.categorias = categorias;
+	}
+
+	public Boolean getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(Boolean produtos) {
+		this.produtos = produtos;
+	}
+
+	public Boolean getUnidades() {
+		return unidades;
+	}
+
+	public void setUnidades(Boolean unidades) {
+		this.unidades = unidades;
+	}
+
+	public Boolean getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Boolean usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@Override

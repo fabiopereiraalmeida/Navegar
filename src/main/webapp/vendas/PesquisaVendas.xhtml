@@ -3,19 +3,23 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui">
 
 	<ui:define name="titulo">Pesquisa vendas</ui:define>
 	<!-- TITULO DA ABA -->
 
 	<ui:define name="corpo">
+	
 		<h:form>
 			<h1>Pesquisa vendas</h1>
 			<!-- TITULO VISIVEL NA PAGINA -->
 
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton value="Pesquisar" />
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaVendaCabecalhoBean.pesquisar}" update="@form" />
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
@@ -25,27 +29,35 @@
 
 			<p:panelGrid columns="2" id="panel"
 				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
-				<p:outputLabel value="Codigo" for="cod" />
-				<p:inputText id="cod" size="12" />
+
+				<p:outputLabel value="Cod Venda" />
+				<h:panelGroup>
+					<p:inputText size="10"
+						value="#{pesquisaVendaCabecalhoBean.filtro.codVendaDe}" />
+						a
+						<p:inputText size="10"
+						value="#{pesquisaVendaCabecalhoBean.filtro.codVendaAte}" />
+				</h:panelGroup>
 
 				<p:outputLabel value="Data venda" />
 				<h:panelGroup>
-					<p:calendar size="10" pattern="dd/MM/yyyy" />
+					<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaVendaCabecalhoBean.filtro.dataVendaDe}"
+						mask="99/99/9999" showOn="button"/>
 						a
-						<p:calendar size="10" pattern="dd/MM/yyyy" />
+						<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaVendaCabecalhoBean.filtro.dataVendaAte}"
+						mask="99/99/9999" showOn="button"/>
 				</h:panelGroup>
 
 				<p:outputLabel value="Cliente" for="cliente" />
-				<p:inputText id="cliente" size="30" />
+				<p:inputText id="cliente" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeCliente}"/>
 
 				<p:outputLabel value="Vendedor" for="vendedor" />
-				<p:inputText id="vendedor" size="30" />
-				
-				<p:outputLabel value="Vendedor"/>
-				<p:selectManyCheckbox>
-					<f:selectItem itemLabel="Teste1"/>
-					<f:selectItem itemLabel="Teste2"/>
-					<f:selectItem itemLabel="Teste3"/>
+				<p:inputText id="vendedor" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeVendedor}"/>
+
+				<p:outputLabel value="Estado da venda" />
+				<p:selectManyCheckbox value="#{pesquisaVendaCabecalhoBean.filtro.estadosVendas}">
+					<f:selectItems value="#{pesquisaVendaCabecalhoBean.estadoVendaList}" var="estadoVenda"
+					itemValue="#{estadoVenda}" itemLabel="#{estadoVenda.nome}"/>
 				</p:selectManyCheckbox>
 
 			</p:panelGrid>
@@ -54,30 +66,34 @@
 				emptyMessage="Nenhum produto encontrado!" rows="20" paginator="true"
 				paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
-				<p:column headerText="Codigo"
+				<p:column headerText="Cod. Venda"
 					style="text-align: center; width: 100px">
-					<h:outputText />
+					<h:outputText value="vendaCabecalho.codVenda"/>
 				</p:column>
 
 				<p:column headerText="Cliente" style="text-align: left">
-					<h:outputText />
+					<h:outputText value="vendaCabecalho.cliente.nome"/>
 				</p:column>
 
 				<p:column headerText="Total" style="text-align: center; width: 60px">
-					<h:outputText />
+					<h:outputText value="vendaCabecalho.valorTotal"/>
 				</p:column>
 
 				<p:column headerText="Data" style="text-align: center; width: 60px">
-					<h:outputText />
+					<h:outputText value="vendaCabecalho.dataVenda"/>
 				</p:column>
 
 				<p:column headerText="Vendedor" style="text-align: left">
-					<h:outputText />
+					<h:outputText value="vendaCabecalho.usuario.nome"/>
 				</p:column>
-
+				
 				<p:column headerText="Form. Pagamento"
 					style="text-align: center; width: 150px">
-					<h:outputText />
+					<h:outputText value="vendaCabecalho.formaPagamento.nome"/>
+				</p:column>
+				
+				<p:column headerText="Est. Venda" style="text-align: left">
+					<h:outputText value="vendaCabecalho.estadoVenda.nome"/>
 				</p:column>
 
 				<p:column headerText="Opções"

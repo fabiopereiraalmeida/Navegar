@@ -26,6 +26,7 @@ public class VendaCabecalho implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	private Long codVenda;
 	private Cliente cliente;
 	private Double valorParcial;
 	private Double valorDesconto;
@@ -33,6 +34,7 @@ public class VendaCabecalho implements Serializable{
 	private Date dataVenda;
 	private Usuario usuario;
 	private FormaPagamento formaPagamento;
+	private EstadoVenda estadoVenda;
 	private List<VendaDetalhe> vendaCabecalhoList = new ArrayList<>();
 	private List<ContaReceber> contaReceberList = new ArrayList<>();
 	
@@ -46,6 +48,16 @@ public class VendaCabecalho implements Serializable{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	@NotNull
+	@JoinColumn(name = "cod_venda", nullable = false)
+	public Long getCodVenda() {
+		return codVenda;
+	}
+
+	public void setCodVenda(Long codVenda) {
+		this.codVenda = codVenda;
 	}
 
 	@NotNull
@@ -123,6 +135,17 @@ public class VendaCabecalho implements Serializable{
 
 	public void setFormaPagamento(FormaPagamento formaPagamento) {
 		this.formaPagamento = formaPagamento;
+	}
+		
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "estado_venda", nullable = false)
+	public EstadoVenda getEstadoVenda() {
+		return estadoVenda;
+	}
+
+	public void setEstadoVenda(EstadoVenda estadoVenda) {
+		this.estadoVenda = estadoVenda;
 	}
 
 	@OneToMany(mappedBy = "vendaCabecalho", cascade = CascadeType.ALL, orphanRemoval = true)
