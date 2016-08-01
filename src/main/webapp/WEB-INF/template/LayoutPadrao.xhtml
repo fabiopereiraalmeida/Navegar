@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">Navegar</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+
+<h:body>
+
+	<p:ajaxStatus styleClass="ajax-status">
+		<f:facet name="start">
+			<h:graphicImage library="images" name="loading02.gif" />
+		</f:facet>
+
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<header>
+		<div style="float: left;">
+			<h:link outcome="/Home">
+				<h:graphicImage library="images" name="logo_velejar_2_128.png" />
+			</h:link>
+		</div>
+
+		<div style="float: right; margin-right: 110px">
+
+			<span
+				style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
+				Olá Usuario! </span>
+
+			<h:form style="display: inline-block">
+				<p:menubar styleClass="menu-sistema">
+				
+					<p:submenu label="Vendas">
+						<p:menuitem value="Nova venda" icon="vendas-icon" outcome="/vendas/PesquisaVendas"/>
+						<p:menuitem value="Consultar venda" icon="consulta-vendas-icon" outcome="/vendas/PesquisaVendas"/>						
+					</p:submenu>
+				
+					<p:submenu label="Cadastro">
+						<p:menuitem value="Cargos" icon="cargos-icon"/>
+						<p:menuitem value="Categorias" icon="categoria-icon" outcome="/categorias/CadastroCategoria"/>
+						<p:menuitem value="Clientes" icon="clientes-icon" outcome="/clientes/CadastroCliente"/>
+						<p:menuitem value="Formas de pagamento"
+							icon="formas-pagamento-icon" outcome="/formasPagamento/CadastroFormaPagamento"/>
+						<p:menuitem value="Fornecedores" icon="fornecedores-icon" outcome="/fornecedores/CadastroFornecedor"/>
+						<p:menuitem value="Produtos" icon="produtos-icon" outcome="/produtos/CadastroProduto"/>
+						<p:menuitem value="Unidades" icon="unidade-icon" outcome="/unidades/CadastroUnidade"/>
+						<p:menuitem value="Usuarios" icon="usuario-icon" outcome="/usuarios/CadastroUsuario"/>
+					</p:submenu>
+
+					<p:submenu label="Funções">
+						<p:menuitem value="Contas a receber" icon="conta-receber-icon" />
+						<p:menuitem value="Contas a pagar" icon="conta-pagar-icon" />
+						<p:menuitem value="Compras" icon="compras-icon" />
+						<p:menuitem value="Vendas" icon="vendas-icon" />
+					</p:submenu>
+
+					<p:submenu label="Ferramentas">
+						<p:menuitem value="Configurações" icon="configuracoes-icon" />
+						<p:menuitem value="Estatisticas" icon="graficos-icon" />
+					</p:submenu>
+
+					<p:submenu label="Ajuda">
+						<p:menuitem value="Sobre" icon="sobre-icon" />
+					</p:submenu>
+
+					<p:menuitem value="Sair" icon="log-off-icon" />
+					
+				</p:menubar>
+			</h:form>
+		</div>
+
+		<div style="clear: both;"></div>
+		<!-- LIMPANDO CONFIGURAÇÔES DE FLUTUAÇÂO  -->
+	</header>
+
+
+	<div id="conteudo">
+		<ui:insert name="corpo" />
+	</div>
+
+	<p:separator
+		style="margin-top: 20px; background-color: #1C1C1C; border-color: #1C1C1C" />
+
+	<footer>
+		<center>
+			Navegar ERP - Todos os direitos reservados - Desenvolvido e mantido
+			pelo <a href="http://www.grupocaravela.com.br" target="_blank">Grupo
+				caravelA</a>
+		</center>
+	</footer>
+</h:body>
+
+</html>

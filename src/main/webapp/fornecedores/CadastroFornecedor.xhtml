@@ -1,0 +1,108 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Novo Fornecedor</ui:define>
+	<!-- TITULO DA ABA -->
+
+	<ui:define name="corpo">
+		<h1>Novo Fornecedor</h1>
+		<!-- TITULO VISIVEL NA PAGINA -->
+
+
+		<p:toolbar style="margin-top: 20px">
+			<p:toolbarGroup>
+				<p:button value="Novo" outcome="/fornecedores/CadastroFornecedor" />
+				<p:commandButton value="Salvar" id="botaoSalvar" />
+			</p:toolbarGroup>
+
+			<p:toolbarGroup align="right">
+				<p:button value="Pesquisa" />
+			</p:toolbarGroup>
+		</p:toolbar>
+
+		<p:tabView dynamic="true" cache="true" effect="fade">
+			<p:tab title="Dados Pessoais">
+				
+					<p:panelGrid columns="2" id="painel"
+						style="width: 100%; margin-top: 20px"						
+						columnClasses="rotulo, campo">
+						
+						<p:outputLabel value="Id" for="idnt" />
+						<p:inputText id="idnt" size="10" maxlength="20" />
+
+						<p:outputLabel value="Razão Social" for="razaoSocial" />
+						<p:inputText id="razaoSocial" size="60" maxlength="80" />
+
+						<p:outputLabel value="Fantasia" for="fantasia" />
+						<p:inputText id="fantasia" size="60" maxlength="60" />
+
+						<p:outputLabel value="CNPJ" for="cnpj" />
+						<p:inputText id="cnpj" size="20" maxlength="20" />
+						
+						<p:outputLabel value="CPF" for="cpf" />
+						<p:inputText id="cpf" size="20" maxlength="20" />
+																						
+						<p:outputLabel value="Observaçao" for="obs" />
+						<p:inputText id="obs" size="20" maxlength="20" />
+												
+					</p:panelGrid>
+
+			</p:tab>
+			
+			<p:tab title="Endereço">
+			
+				<p:panelGrid columns="2" id="painel"
+						style="width: 100%; margin-top: 20px"						
+						columnClasses="rotulo, campo">
+
+						<p:outputLabel value="Endereço" for="endereco" />
+						<p:inputText id="endereco" size="80" maxlength="80" />
+										
+						<p:outputLabel value="Numero" for="numero" />
+						<p:inputText id="numero" size="10" maxlength="10" />
+						
+						<p:outputLabel value="Complemento" for="complemento" />
+						<p:inputText id="complemento" size="40" maxlength="40" />
+						
+						<p:outputLabel value="Bairro" for="bairro" />
+						<p:inputText id="bairro" size="40" maxlength="40" />
+						
+						<p:outputLabel value="Cidade" for="cidade" />
+						<p:inputText id="cidade" size="50" maxlength="50" />
+						
+						<p:outputLabel value="UF" for="uf" />
+						<p:inputText id="uf" size="10" maxlength="10" />
+						
+						<p:outputLabel value="CEP" for="cep" />
+						<p:inputText id="cep" size="20" maxlength="20" />
+
+				</p:panelGrid>
+			</p:tab>
+			
+			<p:tab title="Contato">
+				<p:panelGrid columns="2" id="painel"
+						style="width: 100%; margin-top: 20px"						
+						columnClasses="rotulo, campo">
+
+						<p:outputLabel value="Telefone 01" for="telefone01" />
+						<p:inputText id="telefone01" size="20" maxlength="20" />
+						
+						<p:outputLabel value="Telefone 02" for="telefone02" />
+						<p:inputText id="telefone02" size="20" maxlength="20" />
+										
+						<p:outputLabel value="E-Mail" for="email" />
+						<p:inputText id="email" size="80" maxlength="80" />
+
+				</p:panelGrid>
+			</p:tab>
+
+		</p:tabView>
+
+
+
+	</ui:define>
+</ui:composition>

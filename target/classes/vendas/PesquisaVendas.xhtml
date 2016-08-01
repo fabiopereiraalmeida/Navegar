@@ -1,0 +1,93 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="titulo">Pesquisa vendas</ui:define>
+	<!-- TITULO DA ABA -->
+
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Pesquisa vendas</h1>
+			<!-- TITULO VISIVEL NA PAGINA -->
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Nova venda" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="panel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Codigo" for="cod" />
+				<p:inputText id="cod" size="12" />
+
+				<p:outputLabel value="Data venda" />
+				<h:panelGroup>
+					<p:calendar size="10" pattern="dd/MM/yyyy" />
+						a
+						<p:calendar size="10" pattern="dd/MM/yyyy" />
+				</h:panelGroup>
+
+				<p:outputLabel value="Cliente" for="cliente" />
+				<p:inputText id="cliente" size="30" />
+
+				<p:outputLabel value="Vendedor" for="vendedor" />
+				<p:inputText id="vendedor" size="30" />
+				
+				<p:outputLabel value="Vendedor"/>
+				<p:selectManyCheckbox>
+					<f:selectItem itemLabel="Teste1"/>
+					<f:selectItem itemLabel="Teste2"/>
+					<f:selectItem itemLabel="Teste3"/>
+				</p:selectManyCheckbox>
+
+			</p:panelGrid>
+
+			<p:dataTable id="produtosTable" style="margin-top: 20px"
+				emptyMessage="Nenhum produto encontrado!" rows="20" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+				<p:column headerText="Codigo"
+					style="text-align: center; width: 100px">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Cliente" style="text-align: left">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Total" style="text-align: center; width: 60px">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Data" style="text-align: center; width: 60px">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Vendedor" style="text-align: left">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Form. Pagamento"
+					style="text-align: center; width: 150px">
+					<h:outputText />
+				</p:column>
+
+				<p:column headerText="Opções"
+					style="text-align: center; width: 100px">
+					<p:button icon="opcao-editar-icon" />
+					<p:button icon="opcao-excluir-icon" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,108 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">Novo Produto</ui:define>
+	<!-- TITULO DA ABA -->
+
+	<ui:define name="corpo">
+
+		<f:metadata>
+			<o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+			<f:viewAction action="#{cadastroProdutoBean.inicializar}" />
+		</f:metadata>
+
+		<h:form id="frm">
+			<p:focus context="frm" />
+
+			<h1>Novo produto</h1>
+			<!-- TITULO VISIVEL NA PAGINA -->
+
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/produtos/CadastroProduto" />
+					<p:commandButton value="Salvar" id="botaoSalvar"
+						action="#{cadastroProdutoBean.salvar}" update="@form" />
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:panelGrid columns="2" id="painel"
+				style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+
+				<p:outputLabel value="Codigo" for="cod" />
+				<p:inputText id="cod" size="20" maxlength="20"
+					value="#{cadastroProdutoBean.produto.codigo}" />
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80"
+					value="#{cadastroProdutoBean.produto.nome}" />
+
+				<p:outputLabel value="Unidade" for="unidade" />
+				<p:selectOneMenu id="unidade"
+					value="#{cadastroProdutoBean.produto.unidade}">
+					<f:selectItem itemLabel="Selecione a unidade" />
+					<f:selectItems value="#{cadastroProdutoBean.unidadeList}"
+						var="unidade" itemValue="#{unidade}" itemLabel="#{unidade.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Categoria" for="categoria" />
+				<p:selectOneMenu id="categoria"
+					value="#{cadastroProdutoBean.produto.categoria}">
+					<f:selectItem itemLabel="Selecione a categoria" />
+					<f:selectItems value="#{cadastroProdutoBean.categoriaList}"
+						var="categoria" itemValue="#{categoria}"
+						itemLabel="#{categoria.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Margem de lucro desejavel"
+					for="margemLucroDesejavel" />
+				<p:inputText id="margemLucroDesejavel" size="20" maxlength="20"
+					styleClass="moeda" value="#{cadastroProdutoBean.produto.margemLucroDesejavel}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>	
+				</p:inputText>
+
+				<p:outputLabel value="Margem de lucro minimo"
+					for="margemLucroMinimo" />
+				<p:inputText id="margemLucroMinimo" size="20" maxlength="20"
+					styleClass="moeda" value="#{cadastroProdutoBean.produto.margemLucroMinimo}"/>
+
+				<p:outputLabel value="Valor" for="valor" />
+				<p:inputText id="valor" size="20" maxlength="20"
+					styleClass="moeda" value="#{cadastroProdutoBean.produto.valorDesejavelVenda}"/>
+
+				<p:outputLabel value="Valor minimo" for="valorMinimo" />
+				<p:inputText id="valorMinimo" size="20" maxlength="20"
+					styleClass="moeda" value="#{cadastroProdutoBean.produto.valorMinimoVenda}"/>				
+
+				<p:outputLabel value="Estoque minimo" for="estoqueMinimo" />
+				<p:inputText id="estoqueMinimo" size="20" maxlength="20"
+					value="#{cadastroProdutoBean.produto.estoqueMinimo}"/>	
+
+				<p:outputLabel value="Estoque desejavel" for="estoqueDesejavel" />
+				<p:inputText id="estoqueDesejavel" size="20" maxlength="20"
+					value="#{cadastroProdutoBean.produto.estoqueDesejavel}"/>
+
+				<p:outputLabel value="Estoque" for="estoque" />
+				<p:inputText id="estoque" size="20" maxlength="20"
+					value="#{cadastroProdutoBean.produto.estoque}"/>
+				
+				<p:outputLabel value="Peso" for="peso" />
+				<p:inputText id="peso" size="20" maxlength="20"
+					value="#{cadastroProdutoBean.produto.peso}"/>
+				
+					
+			</p:panelGrid>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

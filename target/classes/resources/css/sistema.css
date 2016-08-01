@@ -1,0 +1,165 @@
+@charset "utf-8";
+
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0px;
+	font-weight: normal;
+}
+
+header {
+	padding: 5px, 0px;
+	margin-bottom: 20px;
+	height: 35px;
+	background-color: #1C1C1C;
+	color: #fff;
+	box-shadow: 0px 2px 2px #ccc;
+}
+
+header>div {
+	margin-left: 8px;
+}
+
+#conteudo {
+	padding: 0px 8px
+}
+
+footer {
+	padding: 0px 8px;
+	margin-bottom: 10px;
+}
+
+h1 {
+	font-size: 24px;
+	font-weight: normal;
+	padding: 0px;
+	margin: 0px;
+}
+
+#login-dialog {
+	width: 290px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.grid-login {
+	background-color: #ffffff;
+	border: 1px solid #CFCFCF; border-radius : 8px;
+	margin-top: 8px;
+	padding: 10px;
+	border-radius: 8px;
+}
+
+.rotulo {
+	width: 150px;
+}
+
+.ui-panelgrid td {
+	height: 34px;
+}
+
+.ajax-status {
+	width: 210px;
+	height: 210px;
+	position: fixed;
+	left: 50%;
+  	top: 50%;
+  	margin-top:-105px;
+	margin-left:-105px;
+}
+
+/* Menu sistema inicio */
+.menu-sistema {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+    color: #ffffff !important;
+   
+}
+
+.menu-sistema .ui-icon-triangle-1-s {
+    background: url(#{resource['images:seta_baixo_azul_16.png']}) no-repeat !important;
+}
+/* Menu sistema fim */
+
+/*ICONES INICIO*/
+
+.log-off-icon {
+	background: url(#{resource['images:log_off_16.png']}) no-repeat !important;	
+}
+
+.clientes-icon {
+	background: url(#{resource['images:clientes_16.png']}) no-repeat !important;
+}
+
+.cargos-icon {
+	background: url(#{resource['images:cargo_16.png']}) no-repeat !important;
+}
+
+.formas-pagamento-icon {
+	background: url(#{resource['images:forma_pagamento_16.png']}) no-repeat !important;
+}
+
+.categoria-icon {
+	background: url(#{resource['images:categoria_16.png']}) no-repeat !important;
+}
+
+.fornecedores-icon {
+	background: url(#{resource['images:fornecedor_16.png']}) no-repeat !important;
+}
+
+.produtos-icon {
+	background: url(#{resource['images:produtos_16.png']}) no-repeat !important;
+}
+
+.unidade-icon {
+	background: url(#{resource['images:unidade_16.png']}) no-repeat !important;
+}
+
+.usuario-icon {
+	background: url(#{resource['images:usuario_16.png']}) no-repeat !important;
+}
+
+.conta-receber-icon {
+	background: url(#{resource['images:contas_receber_16.png']}) no-repeat !important;
+}
+
+.conta-pagar-icon {
+	background: url(#{resource['images:contas_pagar_16.png']}) no-repeat !important;
+}
+
+.compras-icon {
+	background: url(#{resource['images:compras_16.png']}) no-repeat !important;
+}
+
+.vendas-icon {
+	background: url(#{resource['images:vendas_16.png']}) no-repeat !important;
+}
+
+.sobre-icon {
+	background: url(#{resource['images:sobre_16.png']}) no-repeat !important;
+}
+
+.graficos-icon {
+	background: url(#{resource['images:graficos_16.png']}) no-repeat !important;
+}
+
+.configuracoes-icon {
+	background: url(#{resource['images:configure_16.png']}) no-repeat !important;
+}
+
+.opcao-editar-icon {
+	background: url(#{resource['images:alterar_16.png']}) no-repeat !important;
+}
+
+.opcao-excluir-icon {
+	background: url(#{resource['images:alerta_vermelho_16.png']}) no-repeat !important;
+}
+
+.consulta-vendas-icon {
+	background: url(#{resource['images:consulta_16.png']}) no-repeat !important;
+}
+/*ICONES FIM*/
