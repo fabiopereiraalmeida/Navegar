@@ -8,16 +8,10 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.grupocaravela.model.EstadoVenda;
+import br.com.grupocaravela.model.StatusVenda;
 import br.com.grupocaravela.model.VendaCabecalho;
-import br.com.grupocaravela.repository.Categorias;
-import br.com.grupocaravela.repository.EstadoVendas;
 import br.com.grupocaravela.repository.VendasCabecalho;
-import br.com.grupocaravela.repository.filter.EstadoVendaFilter;
 import br.com.grupocaravela.repository.filter.VendaCabecalhoFilter;
-import br.com.grupocaravela.util.cdi.CDIServiceLocator;
-import br.com.grupocaravela.util.jpa.Transactional;
-import br.com.grupocaravela.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -28,22 +22,15 @@ public class PesquisaVendaCabecalhoBean implements Serializable{
 	@Inject
 	private VendasCabecalho vendasCabecalho;
 	
-	@Inject
-	private EstadoVendas estadoVendas;
-			
+				
 	private VendaCabecalhoFilter filtro;
 	private List<VendaCabecalho> vendaCabecalhoFiltrados;
 	
-	private List<EstadoVenda> estadoVendaList;	
 	
 	public PesquisaVendaCabecalhoBean() {
 		filtro = new VendaCabecalhoFilter();
 		vendaCabecalhoFiltrados = new ArrayList<>();
-		
-		//########################		
-		estadoVendas = CDIServiceLocator.getBean(EstadoVendas.class); //Alternativa para o @Inject
-		estadoVendaList = new ArrayList<>();
-		estadoVendaList = estadoVendas.buscarEstadoVendas();
+				
 	}
 	
 	public void pesquisar(){
@@ -58,8 +45,8 @@ public class PesquisaVendaCabecalhoBean implements Serializable{
 		return filtro;
 	}
 
-	public List<EstadoVenda> getEstadoVendaList() {
-		return estadoVendaList;
+	public StatusVenda[] getStatuses(){
+		 return StatusVenda.values();
 	}
 	
 }

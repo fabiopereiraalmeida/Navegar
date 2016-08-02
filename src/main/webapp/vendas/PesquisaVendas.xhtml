@@ -52,12 +52,12 @@
 				<p:inputText id="cliente" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeCliente}"/>
 
 				<p:outputLabel value="Vendedor" for="vendedor" />
-				<p:inputText id="vendedor" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeVendedor}"/>
+				<p:inputText id="vendedor" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeUsuario}"/>
 
 				<p:outputLabel value="Estado da venda" />
-				<p:selectManyCheckbox value="#{pesquisaVendaCabecalhoBean.filtro.estadosVendas}">
-					<f:selectItems value="#{pesquisaVendaCabecalhoBean.estadoVendaList}" var="estadoVenda"
-					itemValue="#{estadoVenda}" itemLabel="#{estadoVenda.nome}"/>
+				<p:selectManyCheckbox value="#{pesquisaVendaCabecalhoBean.filtro.statuses}">
+					<f:selectItems value="#{pesquisaVendaCabecalhoBean.statuses}" var="status"
+					itemValue="#{status}" itemLabel="#{status.descricao}"/>
 				</p:selectManyCheckbox>
 
 			</p:panelGrid>
@@ -91,11 +91,11 @@
 					style="text-align: center; width: 150px">
 					<h:outputText value="vendaCabecalho.formaPagamento.nome"/>
 				</p:column>
-				
+<!-- 				
 				<p:column headerText="Est. Venda" style="text-align: left">
 					<h:outputText value="vendaCabecalho.estadoVenda.nome"/>
 				</p:column>
-
+ -->
 				<p:column headerText="Opções"
 					style="text-align: center; width: 100px">
 					<p:button icon="opcao-editar-icon" />

@@ -3,7 +3,7 @@
 import java.io.Serializable;
 import java.util.Date;
 
-import br.com.grupocaravela.model.EstadoVenda;
+import br.com.grupocaravela.model.StatusVenda;
 
 public class VendaCabecalhoFilter implements Serializable{
 
@@ -13,9 +13,9 @@ public class VendaCabecalhoFilter implements Serializable{
 	private Long codVendaAte;
 	private Date dataVendaDe;
 	private Date dataVendaAte;
-	private String nomeVendedor;
+	private String nomeUsuario;
 	private String nomeCliente;
-	private EstadoVenda[] estadosVendas;
+	private StatusVenda[] statuses;
 	
 	public Long getCodVendaDe() {
 		return codVendaDe;
@@ -49,14 +49,14 @@ public class VendaCabecalhoFilter implements Serializable{
 		this.dataVendaAte = dataVendaAte;
 	}
 	
-	public String getNomeVendedor() {
-		return nomeVendedor;
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
-	
-	public void setNomeVendedor(String nomeVendedor) {
-		this.nomeVendedor = nomeVendedor;
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
 	}
-	
+
 	public String getNomeCliente() {
 		return nomeCliente;
 	}
@@ -64,13 +64,14 @@ public class VendaCabecalhoFilter implements Serializable{
 	public void setNomeCliente(String nomeCliente) {
 		this.nomeCliente = nomeCliente;
 	}
-	
-	public EstadoVenda[] getEstadosVendas() {
-		return estadosVendas;
+
+	public StatusVenda[] getStatuses() {
+		return statuses;
+	}
+
+	public void setStatuses(StatusVenda[] statuses) {
+		this.statuses = statuses;
 	}
 	
-		public void setEstadosVendas(EstadoVenda[] estadosVendas) {
-		this.estadosVendas = estadosVendas;
-	}
-		
+	
 }

@@ -81,7 +81,7 @@ public class VendasCabecalho implements Serializable {
 				//fazemos uma associação (join) com cliente e nomeamos de "c"
 				.createAlias("cliente", "c")
 				//fazemos uma associação (join) com vendedor (usuario) e nomeamos de "v"
-				.createAlias("vendedor", "v");
+				.createAlias("usuario", "u");
 		
 		if (filtro.getCodVendaDe() != null) {
 			//cod deve ser maior ou igual (ge = greate or equals) a filtro.codVendaDe
@@ -106,14 +106,14 @@ public class VendasCabecalho implements Serializable {
 			criteria.add(Restrictions.ilike("c.nome", filtro.getNomeCliente(), MatchMode.ANYWHERE));
 		}
 		
-		if (StringUtils.isNotBlank(filtro.getNomeVendedor())) {
+		if (StringUtils.isNotBlank(filtro.getNomeUsuario())) {
 			//acessamos o nome do vendedor associado ao pedido pelo alias "v", criado anteriormente
-			criteria.add(Restrictions.ilike("v.nome", filtro.getNomeVendedor(), MatchMode.ANYWHERE));
+			criteria.add(Restrictions.ilike("u.nome", filtro.getNomeUsuario(), MatchMode.ANYWHERE));
 		}
 		
-		if (filtro.getEstadosVendas() != null && filtro.getEstadosVendas().length > 0) {
+		if (filtro.getStatuses()!= null && filtro.getStatuses().length > 0) {
 			//adicionamos uma restrição "in", passando um array de constantes da enum StatusPedido
-			criteria.add(Restrictions.in("estadoVenda", filtro.getEstadosVendas()));
+			criteria.add(Restrictions.in("status", filtro.getStatuses()));
 		}
 		
 		return criteria.addOrder(Order.asc("id")).list();
