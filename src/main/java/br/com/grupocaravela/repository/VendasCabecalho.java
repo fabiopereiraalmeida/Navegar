@@ -41,6 +41,7 @@ public class VendasCabecalho implements Serializable {
 		//System.out.println("Passei aki 02");
 		return manager.createQuery("FROM VendaCabecalho", VendaCabecalho.class).getResultList(); //(JPQL) Seleciona o objeto
 	}
+	
 	/*
 	public Categoria porNome(String nome) {
 		try {
@@ -52,6 +53,7 @@ public class VendasCabecalho implements Serializable {
 		}
 	}
 	*/
+	/*
 	public VendaCabecalho guardar(VendaCabecalho vendaCabecalho) {	
 				
 		Empresa empresa = manager.createQuery("from Empresa where id = :id", Empresa.class).setParameter("id", new Long(1)).getSingleResult();
@@ -60,7 +62,8 @@ public class VendasCabecalho implements Serializable {
 		return manager.merge(vendaCabecalho);
 		
 	}
-	
+	*/
+	/*
 	@Transactional	//Qunado vai remover a partir do Controlador ".controller"
 	public void remover(VendaCabecalho vendaCabecalho) throws NegocioException{
 		try {
@@ -72,7 +75,7 @@ public class VendasCabecalho implements Serializable {
 			throw new NegocioException("A VendaCabecalho não pode ser excluida!");
 		}
 	}
-	
+	*/
 	@SuppressWarnings("unchecked")
 	public List<VendaCabecalho> filtrados(VendaCabecalhoFilter filtro) {		
 		Session session = this.manager.unwrap(Session.class);
@@ -116,7 +119,7 @@ public class VendasCabecalho implements Serializable {
 			criteria.add(Restrictions.in("status", filtro.getStatuses()));
 		}
 		
-		return criteria.addOrder(Order.asc("id")).list();
+		return criteria.addOrder(Order.asc("codVenda")).list();
 	}
 	
 }

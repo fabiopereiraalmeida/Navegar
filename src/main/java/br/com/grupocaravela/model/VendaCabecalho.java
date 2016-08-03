@@ -8,6 +8,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,6 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "venda_cabecalho")
@@ -34,6 +37,7 @@ public class VendaCabecalho implements Serializable{
 	private Date dataVenda;
 	private Usuario usuario;
 	private FormaPagamento formaPagamento;
+	private StatusVenda status;
 	
 	private List<VendaDetalhe> vendaCabecalhoList = new ArrayList<>();
 	private List<ContaReceber> contaReceberList = new ArrayList<>();
@@ -137,6 +141,17 @@ public class VendaCabecalho implements Serializable{
 		this.formaPagamento = formaPagamento;
 	}
 	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
+	public StatusVenda getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusVenda status) {
+		this.status = status;
+	}
+
 	@OneToMany(mappedBy = "vendaCabecalho", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<VendaDetalhe> getVendaCabecalhoList() {
 		return vendaCabecalhoList;

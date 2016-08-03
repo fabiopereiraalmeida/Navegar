@@ -32,7 +32,7 @@
 
 				<p:outputLabel value="Cod Venda" />
 				<h:panelGroup>
-					<p:inputText size="10"
+						<p:inputText size="10"
 						value="#{pesquisaVendaCabecalhoBean.filtro.codVendaDe}" />
 						a
 						<p:inputText size="10"
@@ -41,18 +41,18 @@
 
 				<p:outputLabel value="Data venda" />
 				<h:panelGroup>
-					<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaVendaCabecalhoBean.filtro.dataVendaDe}"
+						<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaVendaCabecalhoBean.filtro.dataVendaDe}"
 						mask="99/99/9999" showOn="button"/>
 						a
 						<p:calendar size="10" pattern="dd/MM/yyyy" value="#{pesquisaVendaCabecalhoBean.filtro.dataVendaAte}"
 						mask="99/99/9999" showOn="button"/>
 				</h:panelGroup>
 
-				<p:outputLabel value="Cliente" for="cliente" />
-				<p:inputText id="cliente" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeCliente}"/>
-
-				<p:outputLabel value="Vendedor" for="vendedor" />
-				<p:inputText id="vendedor" size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeUsuario}"/>
+				<p:outputLabel value="Cliente"/>
+				<p:inputText size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeCliente}"/>
+				
+				<p:outputLabel value="Vendedor"/>
+				<p:inputText size="30" value="#{pesquisaVendaCabecalhoBean.filtro.nomeUsuario}"/>
 
 				<p:outputLabel value="Estado da venda" />
 				<p:selectManyCheckbox value="#{pesquisaVendaCabecalhoBean.filtro.statuses}">
@@ -62,40 +62,44 @@
 
 			</p:panelGrid>
 
-			<p:dataTable id="produtosTable" style="margin-top: 20px"
-				emptyMessage="Nenhum produto encontrado!" rows="20" paginator="true"
-				paginatorAlwaysVisible="false" paginatorPosition="bottom">
+			<p:dataTable id="vendasTable" value="#{pesquisaVendaCabecalhoBean.vendaCabecalhoFiltrados}" 
+				var="vendaCabecalho" emptyMessage="Nenhuma venda encontrada!" rows="20" paginator="true"
+				style="margin-top: 20px" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
 				<p:column headerText="Cod. Venda"
 					style="text-align: center; width: 100px">
-					<h:outputText value="vendaCabecalho.codVenda"/>
+					<h:outputText value="#{vendaCabecalho.codVenda}"/>
 				</p:column>
 
 				<p:column headerText="Cliente" style="text-align: left">
-					<h:outputText value="vendaCabecalho.cliente.nome"/>
+					<h:outputText value="#{vendaCabecalho.cliente.nome}"/>
 				</p:column>
 
 				<p:column headerText="Total" style="text-align: center; width: 60px">
-					<h:outputText value="vendaCabecalho.valorTotal"/>
+					<h:outputText value="#{vendaCabecalho.valorTotal}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Data" style="text-align: center; width: 60px">
-					<h:outputText value="vendaCabecalho.dataVenda"/>
+					<h:outputText value="#{vendaCabecalho.dataVenda}">
+						<f:convertDateTime pattern="dd/MM/YYYY HH:mm:ss"/>
+					</h:outputText>
 				</p:column>
 
 				<p:column headerText="Vendedor" style="text-align: left">
-					<h:outputText value="vendaCabecalho.usuario.nome"/>
+					<h:outputText value="#{vendaCabecalho.usuario.nome}"/>
 				</p:column>
 				
 				<p:column headerText="Form. Pagamento"
 					style="text-align: center; width: 150px">
-					<h:outputText value="vendaCabecalho.formaPagamento.nome"/>
+					<h:outputText value="#{vendaCabecalho.formaPagamento.nome}"/>
 				</p:column>
-<!-- 				
-				<p:column headerText="Est. Venda" style="text-align: left">
-					<h:outputText value="vendaCabecalho.estadoVenda.nome"/>
+
+				<p:column headerText="Est. Venda" style="text-align: center; width: 150px">
+					<h:outputText value="#{vendaCabecalho.status.descricao}"/>
 				</p:column>
- -->
+
 				<p:column headerText="Opções"
 					style="text-align: center; width: 100px">
 					<p:button icon="opcao-editar-icon" />

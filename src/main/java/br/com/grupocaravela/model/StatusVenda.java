@@ -2,8 +2,8 @@ package br.com.grupocaravela.model;
 
 public enum StatusVenda {
 
-	ABERTA("Aberta"), 
-	FINALIZADA("Finalizada"), 
+	ABERTO("Aberto"), 
+	FINALIZADO("Finalizado"), 
 	ENTREGUE("Entregue"), 
 	CANCELADO("Cancelado");
 	
