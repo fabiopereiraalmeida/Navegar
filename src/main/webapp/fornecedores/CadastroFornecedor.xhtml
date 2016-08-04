@@ -7,7 +7,8 @@
 	xmlns:o="http://omnifaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Novo Fornecedor</ui:define>
+	<ui:define name="titulo">#{cadastroFornecedorBean.editando ? "Editando fornecedor" :
+				"Novo fornecedor"}</ui:define>
 	<!-- TITULO DA ABA -->
 
 	<ui:define name="corpo">
@@ -20,7 +21,7 @@
 		<h:form id="frm">
 			<p:focus context="frm" />
  
-			<h1>Novo Fornecedor</h1>
+			<h1>#{cadastroFornecedorBean.editando ? "Editando fornecedor" : "Novo fornecedor"}</h1>
 
 			<p:messages autoUpdate="true" closable="true" />
 
