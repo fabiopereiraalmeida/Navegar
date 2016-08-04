@@ -3,21 +3,50 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Nova Categoria</ui:define>
+	<ui:define name="titulo">#{cadastroVendaCabecalhoBean.editando ? "Editando venda" : "Nova venda"}</ui:define>
 	<!-- TITULO DA ABA -->
 
 	<ui:define name="corpo">
-		<h:form>
-			
-			<h1>Nova Venda</h1>
-			
+
+		<f:metadata>
+			<o:viewParam name="vendaCabecalho"
+				value="#{cadastroVendaCabecalhoBean.vendaCabecalho}" />
+			<f:viewAction action="#{cadastroVendaCabecalhoBean.inicializar}" />
+			<!--  
+			<f:event listener="#{cadastroVendaCabecalhoBean.inicializar}" type="preRenderView"/>
+			-->
+		</f:metadata>
+
+		<h:form id="frm">>
+		<p:focus context="frm" />
+
+			<h1>#{cadastroVendaCabecalhoBean.editando ? "Editando venda" :
+				"Nova venda"}</h1>
+
 			<p:messages autoUpdate="true" closable="true" />
-			
-			<ui:include src="/WEB-INF/template/vendas/BotoesVenda.xhtml"/>
+
+			<ui:include src="/WEB-INF/template/vendas/BotoesVenda.xhtml" />
+
+			<ui:include src="/WEB-INF/template/vendas/CapaVenda.xhtml" />
+
+			<p:tabView style="margin-top: 20px">
+				<!-- 
+	    		<p:tab title="Itens">
+	    			<ui:include src="/WEB-INF/template/vendas/ItensPedido.xhtml" />
+	    		</p:tab>
+	    		 -->
+				<p:tab title="Dados de entrega">
+					<ui:include src="/WEB-INF/template/vendas/DadosEntregaVenda.xhtml" />
+				</p:tab>
+				
+	    		<p:tab title="Observação">
+	    			<ui:include src="/WEB-INF/template/vendas/ObservacaoVenda.xhtml" />
+	    		</p:tab>
+	    		
+			</p:tabView>
 
 		</h:form>
 	</ui:define>

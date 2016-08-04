@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -25,6 +26,7 @@ import br.com.grupocaravela.repository.filter.CategoriaFilter;
 import br.com.grupocaravela.repository.filter.VendaCabecalhoFilter;
 import br.com.grupocaravela.service.NegocioException;
 import br.com.grupocaravela.util.jpa.Transactional;
+import br.com.grupocaravela.util.jsf.FacesUtil;
 
 public class VendasCabecalho implements Serializable {
 
@@ -35,6 +37,26 @@ public class VendasCabecalho implements Serializable {
 	
 	public VendaCabecalho porId(Long id) {
 		return manager.find(VendaCabecalho.class, id);
+	}
+	
+	public Long ultimoCodVenda() {
+
+		try {
+			Query consulta = manager.createQuery("FROM VendaCabecalho ORDER BY codVenda DESC");		
+			List<VendaCabecalho> vList = consulta.getResultList();
+			
+			if (vList.size() > 0) {
+				return vList.get(0).getCodVenda();
+			}else{
+				//FacesUtil.addInfoMessage("Primeira venda realizada com sucesso!");
+				return new Long(0);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ERRO!" + e);
+			return null;
+		}
+		
 	}
 	
 	public List<VendaCabecalho> buscarVendasCabecalho() {
@@ -53,16 +75,16 @@ public class VendasCabecalho implements Serializable {
 		}
 	}
 	*/
-	/*
+	
 	public VendaCabecalho guardar(VendaCabecalho vendaCabecalho) {	
-				
+						
 		Empresa empresa = manager.createQuery("from Empresa where id = :id", Empresa.class).setParameter("id", new Long(1)).getSingleResult();
 		vendaCabecalho.setEmpresa(empresa);
 		
 		return manager.merge(vendaCabecalho);
 		
 	}
-	*/
+	
 	/*
 	@Transactional	//Qunado vai remover a partir do Controlador ".controller"
 	public void remover(VendaCabecalho vendaCabecalho) throws NegocioException{

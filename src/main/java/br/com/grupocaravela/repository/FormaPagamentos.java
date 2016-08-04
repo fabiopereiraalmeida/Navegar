@@ -18,6 +18,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.grupocaravela.model.Empresa;
 import br.com.grupocaravela.model.FormaPagamento;
+import br.com.grupocaravela.model.Usuario;
 import br.com.grupocaravela.repository.filter.FormaPagamentoFilter;
 import br.com.grupocaravela.service.NegocioException;
 import br.com.grupocaravela.util.jpa.Transactional;
@@ -29,6 +30,11 @@ public class FormaPagamentos implements Serializable{
 	@Inject
 	private EntityManager manager;
 
+	public List<FormaPagamento> buscarTodasFormasPagamento() {
+		//System.out.println("Passei aki 02");
+		return manager.createQuery("FROM FormaPagamento", FormaPagamento.class).getResultList(); //(JPQL) Seleciona o objeto
+	}
+	
 	public FormaPagamento guardar(FormaPagamento formaPagamento) {	
 		
 		Empresa empresa = manager.createQuery("from Empresa where id = :id", Empresa.class).setParameter("id", new Long(1)).getSingleResult();

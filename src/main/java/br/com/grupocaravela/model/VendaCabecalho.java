@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -31,16 +32,19 @@ public class VendaCabecalho implements Serializable{
 	
 	private Long id;
 	private Long codVenda;
+	private String observacao;
 	private Cliente cliente;
-	private Double valorParcial;
-	private Double valorDesconto;
-	private Double valorTotal;
+	private Double valorParcial = 0.0;
+	private Double valorDesconto = 0.0;
+	private Double valorTotal = 0.0;
 	private Date dataVenda;
+	private Date dataEntrega;
 	private Usuario usuario;
 	private FormaPagamento formaPagamento;
-	private StatusVenda status;
+	private StatusVenda status = StatusVenda.ABERTO;
+	private EnderecoEntrega enderecoEntrega;
 	
-	private List<VendaDetalhe> vendaCabecalhoList = new ArrayList<>();
+	private List<VendaDetalhe> vendaDetalheList = new ArrayList<>();
 	private List<ContaReceber> contaReceberList = new ArrayList<>();
 	
 	private Empresa empresa;
@@ -55,14 +59,22 @@ public class VendaCabecalho implements Serializable{
 		this.id = id;
 	}
 	
-	@NotNull
-	@JoinColumn(name = "cod_venda", nullable = false)
+	@JoinColumn(name = "cod_venda")
 	public Long getCodVenda() {
 		return codVenda;
 	}
 
 	public void setCodVenda(Long codVenda) {
 		this.codVenda = codVenda;
+	}
+	
+	@Column(columnDefinition = "text")
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	@NotNull
@@ -119,6 +131,16 @@ public class VendaCabecalho implements Serializable{
 	public void setDataVenda(Date dataVenda) {
 		this.dataVenda = dataVenda;
 	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_entrega")
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(Date dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
 
 	@NotNull
 	@ManyToOne
@@ -153,13 +175,22 @@ public class VendaCabecalho implements Serializable{
 		this.status = status;
 	}
 
-	@OneToMany(mappedBy = "vendaCabecalho", cascade = CascadeType.ALL, orphanRemoval = true)
-	public List<VendaDetalhe> getVendaCabecalhoList() {
-		return vendaCabecalhoList;
+	@Embedded
+	public EnderecoEntrega getEnderecoEntrega() {
+		return enderecoEntrega;
 	}
 
-	public void setVendaCabecalhoList(List<VendaDetalhe> vendaCabecalhoList) {
-		this.vendaCabecalhoList = vendaCabecalhoList;
+	public void setEnderecoEntrega(EnderecoEntrega enderecoEntrega) {
+		this.enderecoEntrega = enderecoEntrega;
+	}
+	
+	@OneToMany(mappedBy = "vendaCabecalho", cascade = CascadeType.ALL, orphanRemoval = true)
+	public List<VendaDetalhe> getVendaDetalheList() {
+		return vendaDetalheList;
+	}
+
+	public void setVendaDetalheList(List<VendaDetalhe> vendaDetalheList) {
+		this.vendaDetalheList = vendaDetalheList;
 	}
 	
 	@OneToMany(mappedBy = "vendaCabecalho", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -184,7 +215,7 @@ public class VendaCabecalho implements Serializable{
 
 	@Transient
 	public boolean isNovo(){
-		return getId() == null;
+		return this.getId() == null;
 	}
 	
 	@Transient

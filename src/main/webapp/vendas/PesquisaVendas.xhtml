@@ -23,7 +23,7 @@
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
-					<p:button value="Nova venda" />
+					<p:button value="Nova venda" outcome="/vendas/CadastroVenda"/>
 				</p:toolbarGroup>
 			</p:toolbar>
 
@@ -102,8 +102,9 @@
 
 				<p:column headerText="Opções"
 					style="text-align: center; width: 100px">
-					<p:button icon="opcao-editar-icon" />
-					<p:button icon="opcao-excluir-icon" />
+					<p:button icon="opcao-editar-icon" title="Editar" outcome="/vendas/CadastroVenda">
+						<f:param name="venda" value="#{vendaCabecalho.id}"/>
+					</p:button>
 				</p:column>
 
 			</p:dataTable>

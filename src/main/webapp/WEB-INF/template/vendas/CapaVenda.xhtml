@@ -3,11 +3,72 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo">
-		<p:outputLabel value="Cod. Venda" rendered="#{cadastroVendaCabecalhoBean.vendaCabecalho.existente}"/>
-		<h:outputText value="#{cadastroVendaCabecalhoBean.vendaCabecalho.codVenda}" rendered="#{cadastroVendaCabecalhoBean.vendaCabecalho.existente}"/>
-	
+
+	<p:panelGrid columns="4" style="width: 100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+		<p:outputLabel value="Cod. Venda"
+			rendered="#{cadastroVendaCabecalhoBean.vendaCabecalho.existente}" />
+		<h:outputText
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.codVenda}"
+			rendered="#{cadastroVendaCabecalhoBean.vendaCabecalho.existente}" />
+
+		<p:outputLabel value="Data Venda"
+			rendered="#{cadastroVendaCabecalhoBean.vendaCabecalho.existente}" />
+		<h:outputText
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.dataVenda}"
+			rendered="#{cadastroVendaCabecalhoBean.vendaCabecalho.existente}">
+			<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+		</h:outputText>
+
+		<p:outputLabel value="Status" />
+		<h:outputText
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.status.descricao}" />
+
+		<p:outputLabel value="Vendedor" for="usuario" />
+		<p:selectOneMenu id="usuario"
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.usuario}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems value="#{cadastroVendaCabecalhoBean.usuarioList}"
+				var="usuario" itemValue="#{usuario}" itemLabel="#{usuario.nome}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Cliente" for="cliente" />
+		<p:autoComplete id="cliente" size="40" dropdown="true"
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.cliente}"
+			completeMethod="#{cadastroVendaCabecalhoBean.completarCliente}"
+			var="cliente" itemValue="#{cliente}" itemLabel="#{cliente.nome}"
+			forceSelection="true" />
+
+		<p:outputLabel value="Forma de Pagamento" for="formaPagamento" />
+		<p:selectOneMenu id="formaPagamento"
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.formaPagamento}">
+			<f:selectItem itemLabel="Selecione" />
+			<f:selectItems
+				value="#{cadastroVendaCabecalhoBean.formaPagamentoList}"
+				var="formaPagamento" itemValue="#{formaPagamento}"
+				itemLabel="#{formaPagamento.nome}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Valor parcial" style="font-weight: bold" />
+		<h:outputText
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorParcial}"
+			style="font-weight: bold" id="valorParcial">
+			<f:convertNumber type="currency" />
+		</h:outputText>
+
+		<p:outputLabel value="Desconto" style="font-weight: bold" />
+		<h:outputText
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorDesconto}"
+			style="font-weight: bold" id="valorDesconto" />
+
+		<p:outputLabel value="Total" style="font-weight: bold; font-size: 1.1em" />
+		<h:outputText
+			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorTotal}"
+			style="font-weight: bold; font-size: 1.1em" id="valorTotal">
+			<f:convertNumber type="currency" />
+		</h:outputText>
+
 	</p:panelGrid>
-		
+
 </ui:composition>
