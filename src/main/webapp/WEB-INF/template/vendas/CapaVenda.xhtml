@@ -50,6 +50,15 @@
 				itemLabel="#{formaPagamento.nome}" />
 		</p:selectOneMenu>
 
+		<p:outputLabel value="Frete" style="font-weight: bold" />
+		<p:inputText id="frete" size="10" maxlength="10" styleClass="moeda" 
+		value="#{cadastroVendaCabecalhoBean.vendaCabecalho.frete}">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+			
+			<p:ajax event="change" process="@this" update="valorTotal"
+			listener="#{cadastroVendaCabecalhoBean.recalcularVenda}"/>	
+		</p:inputText>
+	
 		<p:outputLabel value="Valor parcial" style="font-weight: bold" />
 		<h:outputText
 			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorParcial}"
@@ -58,10 +67,14 @@
 		</h:outputText>
 
 		<p:outputLabel value="Desconto" style="font-weight: bold" />
-		<h:outputText
-			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorDesconto}"
-			style="font-weight: bold" id="valorDesconto" />
-
+		<p:inputText id="desconto" size="10" maxlength="10" styleClass="moeda" 
+		value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorDesconto}">
+			<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+			
+			<p:ajax event="change" process="@this" update="valorTotal"
+			listener="#{cadastroVendaCabecalhoBean.recalcularVenda}"/>	
+		</p:inputText>
+				
 		<p:outputLabel value="Total" style="font-weight: bold; font-size: 1.1em" />
 		<h:outputText
 			value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorTotal}"

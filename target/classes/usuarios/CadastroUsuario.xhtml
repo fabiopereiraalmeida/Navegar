@@ -7,7 +7,8 @@
 	xmlns:o="http://omnifaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Novo Usuario</ui:define>
+	<ui:define name="titulo">#{cadastroUsuarioBean.editando ? "Editando usuario" :
+				"Novo usuario"}</ui:define>
 	<!-- TITULO DA ABA -->
 
 	<ui:define name="corpo">
@@ -21,7 +22,7 @@
 		<h:form id="frm">
 			<p:focus context="frm" />
 	
-		<h1>Novo Usuario</h1>
+		<h1>#{cadastroUsuarioBean.editando ? "Editando usuario" : "Novo usuario"}</h1>
 		<!-- TITULO VISIVEL NA PAGINA -->
 
 		<p:toolbar style="margin-top: 20px">

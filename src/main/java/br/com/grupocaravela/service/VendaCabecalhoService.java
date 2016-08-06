@@ -24,7 +24,19 @@ public class VendaCabecalhoService implements Serializable {
 			vendaCabecalho.setCodVenda(new Long(vendasCabecalho.ultimoCodVenda()) + new Long(1));
 		}
 		
-		return vendasCabecalho.guardar(vendaCabecalho);
+		vendaCabecalho.recalcularValorTotal();
+		
+		if (vendaCabecalho.getVendaDetalheList().isEmpty()) {
+			throw new NegocioException("A venda deve possuir no minimo um item!");
+		}
+		
+		if (vendaCabecalho.isValorTotalNegativo()) {
+			throw new NegocioException("O valor total da venda não pode ser negativo!");
+		}
+		
+		vendaCabecalho = this.vendasCabecalho.guardar(vendaCabecalho);
+		
+		return vendaCabecalho;
 
 	}
 

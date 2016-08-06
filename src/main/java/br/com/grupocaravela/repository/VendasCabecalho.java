@@ -22,6 +22,7 @@ import br.com.grupocaravela.model.Categoria;
 import br.com.grupocaravela.model.Empresa;
 import br.com.grupocaravela.model.Produto;
 import br.com.grupocaravela.model.VendaCabecalho;
+import br.com.grupocaravela.model.VendaDetalhe;
 import br.com.grupocaravela.repository.filter.CategoriaFilter;
 import br.com.grupocaravela.repository.filter.VendaCabecalhoFilter;
 import br.com.grupocaravela.service.NegocioException;
@@ -63,24 +64,16 @@ public class VendasCabecalho implements Serializable {
 		//System.out.println("Passei aki 02");
 		return manager.createQuery("FROM VendaCabecalho", VendaCabecalho.class).getResultList(); //(JPQL) Seleciona o objeto
 	}
-	
-	/*
-	public Categoria porNome(String nome) {
-		try {
-			return manager.createQuery("from Categoria where upper(nome) = :nome", Categoria.class)
-				.setParameter("nome", nome.toUpperCase())
-				.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
-	}
-	*/
-	
+		
 	public VendaCabecalho guardar(VendaCabecalho vendaCabecalho) {	
 						
 		Empresa empresa = manager.createQuery("from Empresa where id = :id", Empresa.class).setParameter("id", new Long(1)).getSingleResult();
 		vendaCabecalho.setEmpresa(empresa);
-		
+				
+		for (VendaDetalhe vDetalhe : vendaCabecalho.getVendaDetalheList()) {		
+			vDetalhe.setEmpresa(empresa);			
+		}
+				
 		return manager.merge(vendaCabecalho);
 		
 	}

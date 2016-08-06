@@ -34,6 +34,7 @@ public class VendaCabecalho implements Serializable{
 	private Long codVenda;
 	private String observacao;
 	private Cliente cliente;
+	private Double frete = 0.0;
 	private Double valorParcial = 0.0;
 	private Double valorDesconto = 0.0;
 	private Double valorTotal = 0.0;
@@ -88,6 +89,17 @@ public class VendaCabecalho implements Serializable{
 		this.cliente = cliente;
 	}
 
+	@NotNull
+	@Min(0)
+	@Column(name = "frete", precision = 11, scale = 2, nullable = false)
+	public Double getFrete() {
+		return frete;
+	}
+
+	public void setFrete(Double frete) {
+		this.frete = frete;
+	}
+	
 	@NotNull
 	@Min(0)
 	@Column(name = "valor_parcial", precision = 11, scale = 2, nullable = false)
@@ -212,17 +224,7 @@ public class VendaCabecalho implements Serializable{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
-
-	@Transient
-	public boolean isNovo(){
-		return this.getId() == null;
-	}
-	
-	@Transient
-	public boolean isExistente(){ //é o contrario de novo
-		return !isNovo();
-	}
-	
+		
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -246,6 +248,81 @@ public class VendaCabecalho implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Transient
+	public Double getCalculoValorParcial(){
+		
+		this.valorParcial = ((this.getValorTotal() - this.getFrete()) + (this.getValorDesconto()));
+		return valorParcial;
+	}
+	
+	public void recalcularValorTotal() {
+		
+		Double total = 0.0;
+		
+		total = ((total + this.frete) - this.valorDesconto);
+		
+		for (VendaDetalhe vDetalhe : this.getVendaDetalheList()) {
+			
+			if (vDetalhe.getProduto() != null && vDetalhe.getProduto().getId() != null) {
+				//vDetalhe.calcularTotalItem();
+				total = total + vDetalhe.getValorTotal();
+			}			
+		}
+		this.setValorParcial((total - this.getFrete()) + this.getValorDesconto());
+		this.setValorTotal(total);
+		
+	}
+
+	public void adicionarItemVazio() {
+		
+		if (this.isAberto()) {
+			
+		}
+		
+		Produto produto = new Produto();
+		
+		VendaDetalhe vDetalhe = new VendaDetalhe();
+		vDetalhe.setProduto(produto);
+		vDetalhe.setQuantidade(1.0);
+		vDetalhe.setVendaCabecalho(this);
+		
+		this.getVendaDetalheList().add(0, vDetalhe);
+	}
+
+	@Transient
+	public boolean isAberto() {
+		return StatusVenda.ABERTO.equals(this.getStatus());
+	}
+	
+	@Transient
+	public boolean isNovo(){
+		return this.getId() == null;
+	}
+	
+	@Transient
+	public boolean isExistente(){ //é o contrario de novo
+		return !isNovo();
+	}
+
+	public void removerItemVazio() {
+		VendaDetalhe vDetalhePrimeiro = this.getVendaDetalheList().get(0);
+		
+		if (vDetalhePrimeiro != null && vDetalhePrimeiro.getProduto().getId() == null) {
+			this.getVendaDetalheList().remove(0);
+		}
+		
+	}
+
+	@Transient
+	public boolean isValorTotalNegativo() {
+		
+		if (this.getValorTotal() < 0) {
+			return true;
+		}else{
+			return false;
+		}		
 	}
 		
 }

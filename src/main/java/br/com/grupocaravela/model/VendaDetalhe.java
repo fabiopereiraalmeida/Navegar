@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -21,10 +22,10 @@ public class VendaDetalhe implements Serializable{
 	private Long id;
 	private VendaCabecalho vendaCabecalho;
 	private Produto produto;
-	private Double quantidade;
-	private Double valorParcial;
-	private Double valorDesconto;
-	private Double valorTotal;
+	private Double quantidade = 1.0;
+	private Double valorParcial = 0.0;
+	private Double valorDesconto = 0.0;
+	private Double valorTotal = 0.0;
 	
 	private Empresa empresa;
 
@@ -61,7 +62,7 @@ public class VendaDetalhe implements Serializable{
 	}
 
 	@NotNull
-	@Min(1)
+	//@Min(1)
 	@Column(name = "quantidade", precision = 11, scale = 2, nullable = false)
 	public Double getQuantidade() {
 		return quantidade;
@@ -97,6 +98,9 @@ public class VendaDetalhe implements Serializable{
 	@Min(0)
 	@Column(name = "valor_total", precision = 11, scale = 2, nullable = false)
 	public Double getValorTotal() {
+		
+		System.out.println("XXXXX - getValorTotal = " + valorTotal);
+		
 		return valorTotal;
 	}
 
@@ -139,4 +143,23 @@ public class VendaDetalhe implements Serializable{
 			return false;
 		return true;
 	}
+	
+	
+	public void calcularTotalItem() {
+		
+		this.valorTotal = 0.0;
+		this.valorParcial = (this.produto.getValorDesejavelVenda() * this.quantidade);
+		
+		System.out.println("XXXXX - valorParcial = " + valorParcial);
+		
+		this.valorTotal = (this.valorParcial - this.valorDesconto);
+				
+	}
+	
+	@Transient
+	public boolean isProdutoAssociado(){
+		return this.getProduto() != null && this.getProduto().getId() != null;
+	}
+
+	
 }

@@ -5,44 +5,58 @@
     xmlns:p="http://primefaces.org/ui">
 
 	<p:dataTable value="#{cadastroVendaCabecalhoBean.vendaCabecalho.vendaDetalheList}" var="vendaDetalhe" rowIndexVar="linha" id="tabelaVendaDetalhes">
-		<p:column headerText="Cod" style="text-align: center; width: 100px">
-			
-			<h:outputText value="#{vendaDetalhe.produto.codigo}" />			
-			<p:inputText size="8" value="#{cadastroVendaCabecalhoBean.}" label="SKU" id="sku"
-				rendered="#{not item.produtoAssociado}">
-				<p:ajax event="change" process="@this" 
-					update="tabelaItens :frmCadastro:totalVenda :frmCadastro:subtotal" 
-					listener="#{cadastroVendaCabecalhoBean.carregarProdutoPorSku}" />
+		
+		<p:column headerText="Código" style="text-align: center; width: 160px">
+			<h:outputText value="#{vendaDetalhe.produto.codigo}" rendered="#{vendaDetalhe.produtoAssociado}"/>
+			<p:inputText size="18" value="#{cadastroVendaCabecalhoBean.codigo}" label="Código" rendered="#{not vendaDetalhe.produtoAssociado}">
+				<p:ajax event="change" process="@this" update="tabelaVendaDetalhes :frmVenda:valorTotal :frmVenda:valorParcial"
+				listener="#{cadastroVendaCabecalhoBean.carregarProdutoPorCodigo}"/>
 			</p:inputText>
 		</p:column>
 		
 		<p:column headerText="Produto">
-			<h:outputText value="#{item.produto.nome}" rendered="#{item.produtoAssociado}" />		
-			<p:autoComplete styleClass="produto-tabela" value="#{cadastroVendaCabecalhoBean.produtoLinhaEditavel}"
+			<h:outputText value="#{vendaDetalhe.produto.nome}" rendered="#{vendaDetalhe.produtoAssociado}"/>			
+			<p:autoComplete size="50" value="#{cadastroVendaCabecalhoBean.produtoLinhaEditavel}"
 				completeMethod="#{cadastroVendaCabecalhoBean.completarProduto}"
 				var="produto" itemLabel="#{produto.nome}" itemValue="#{produto}" 
-				forceSelection="true" rendered="#{not item.produtoAssociado}">
-				<p:ajax event="itemSelect" update="tabelaItens :frmCadastro:totalVenda :frmCadastro:subtotal" 
+				forceSelection="true" rendered="#{not vendaDetalhe.produtoAssociado}">
+				<p:ajax event="itemSelect" update="tabelaVendaDetalhes :frmVenda:valorTotal :frmVenda:valorParcial" 
 					listener="#{cadastroVendaCabecalhoBean.carregarProdutoLinhaEditavel}"/>
 			</p:autoComplete>
 		</p:column>
 		
-		<p:column headerText="Valor unitário" style="text-align: right; width: 120px">
-			<h:outputText value="#{item.valorUnitario}">
+		<p:column headerText="Unidade" style="text-align: center; width: 70px">
+			<h:outputText value="#{vendaDetalhe.produto.unidade.nome}"/>
+		</p:column>
+		
+		<p:column headerText="Valor unitário" style="text-align: right; width: 100px">
+			<h:outputText value="#{vendaDetalhe.produto.valorDesejavelVenda}">
 				<f:convertNumber type="currency"/>
 			</h:outputText>
 		</p:column>
 		
 		<p:column headerText="Quantidade" style="text-align: center; width: 100px">
-			<p:inputText size="8" value="#{item.quantidade}" disabled="#{cadastroVendaCabecalhoBean.venda.naoAlteravel}">
-				<p:ajax event="change" process="@this"
-					update="tabelaItens :frmCadastro:totalVenda :frmCadastro:subtotal"
-					listener="#{cadastroVendaCabecalhoBean.atualizarQuantidade(item, linha)}" />
+			<p:inputText size="8" value="#{vendaDetalhe.quantidade}">
+				<p:ajax event="change" process="@this" update="tabelaVendaDetalhes :frmVenda:valorTotal :frmVenda:valorParcial"
+				listener="#{cadastroVendaCabecalhoBean.atualizarQuantidade(vendaDetalhe, linha)}"/>
+			</p:inputText>
+		</p:column>
+				
+		<p:column headerText="Valor parcial" style="text-align: right; width: 100px">
+			<h:outputText value="#{vendaDetalhe.valorParcial}">
+				<f:convertNumber type="currency"/>
+			</h:outputText>
+		</p:column>
+		
+		<p:column headerText="Desconto" style="text-align: center; width: 100px">
+			<p:inputText size="8" value="#{vendaDetalhe.valorDesconto}">
+				<p:ajax event="change" process="@this" update="tabelaVendaDetalhes :frmVenda:valorTotal :frmVenda:valorParcial"
+				listener="#{cadastroVendaCabecalhoBean.atualizarDesconto(vendaDetalhe, linha)}"/>
 			</p:inputText>
 		</p:column>
 		
-		<p:column headerText="Estoque" style="text-align: center; width: 100px">
-			<h:outputText value="#{item.produto.quantidadeEstoque}" 
+		<p:column headerText="Estoque" style="text-align: center; width: 70px">
+			<h:outputText value="#{vendaDetalhe.produto.estoque}" 
 				style="#{item.estoqueInsuficiente ? 'color: red' : ''}"/>
 			
 			<h:graphicImage library="images" name="alerta.png" id="semEstoque"
@@ -54,17 +68,17 @@
 		</p:column>
 		
 		<p:column headerText="Valor total" style="text-align: right; width: 100px">
-			<h:outputText value="#{item.valorTotal}">
+			<h:outputText value="#{vendaDetalhe.valorTotal}">
 				<f:convertNumber type="currency"/>
 			</h:outputText>
 		</p:column>
 		
 		<p:columnGroup type="footer">
 			<p:row>
-				<p:column colspan="5" footerText="Subtotal" style="text-align: right" />
+				<p:column colspan="8" footerText="Valor parcial" style="text-align: right" />
 				<p:column style="text-align: right">
 					<f:facet name="footer">
-						<h:outputText value="#{cadastroVendaCabecalhoBean.venda.valorSubtotal}">
+						<h:outputText value="#{cadastroVendaCabecalhoBean.vendaCabecalho.valorParcial}">
 							<f:convertNumber type="currency"/>
 						</h:outputText>
 					</f:facet>

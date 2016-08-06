@@ -20,8 +20,8 @@
 			-->
 		</f:metadata>
 
-		<h:form id="frm">
-		<p:focus context="frm" />
+		<h:form id="frmVenda">
+		<p:focus context="frmVenda" />
 
 			<h1>#{cadastroVendaCabecalhoBean.editando ? "Editando venda" :
 				"Nova venda"}</h1>
@@ -33,11 +33,11 @@
 			<ui:include src="/WEB-INF/template/vendas/CapaVenda.xhtml" />
 
 			<p:tabView style="margin-top: 20px">
-				<!-- 
+				 
 	    		<p:tab title="Itens">
-	    			<ui:include src="/WEB-INF/template/vendas/ItensPedido.xhtml" />
+	    			<ui:include src="/WEB-INF/template/vendas/ItensVenda.xhtml" />
 	    		</p:tab>
-	    		 -->
+	    		 
 				<p:tab title="Dados de entrega">
 					<ui:include src="/WEB-INF/template/vendas/DadosEntregaVenda.xhtml" />
 				</p:tab>

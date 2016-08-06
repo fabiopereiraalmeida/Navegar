@@ -6,7 +6,8 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<ui:define name="titulo">Nova Forma de pagamento</ui:define>
+	<ui:define name="titulo">#{cadastroFormaPagamentoBean.editando ? "Editando forma de pagamento" :
+				"Nova forma de pagamento"}</ui:define>
 	<!-- TITULO DA ABA -->
 
 	<ui:define name="corpo">
@@ -20,7 +21,7 @@
 		<h:form id="frm">
 			<p:focus context="frm" />
 
-			<h1>Nova Forma de pagamento</h1>
+			<h1>#{cadastroFormaPagamentoBean.editando ? "Editando forma de pagamento" : "Nova forma de pagamento"}</h1>
 
 			<p:messages autoUpdate="true" closable="true" />
 
